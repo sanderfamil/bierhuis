@@ -8,4 +8,10 @@ http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
 select count(b) from Bier b
 </query>
 </named-query>
+<named-query name="Brouwer.findAll">
+<query>
+select br from Brouwer br
+order by naam
+</query>
+</named-query>
 </entity-mappings>
