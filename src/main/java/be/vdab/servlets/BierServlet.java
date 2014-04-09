@@ -25,8 +25,26 @@ public class BierServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("bier", bierService.read(Long.parseLong(request
-				.getParameter("bierId"))));
+		try{
+		HttpSession session = request.getSession(false);
+		Long bierId=Long.parseLong(request.getParameter("bierId"));
+		if(session!=null){
+			request.setAttribute("mandje", session.getAttribute("mandje"));
+			@SuppressWarnings("unchecked")
+			Map<Long, Integer> mandje = (Map<Long, Integer>)session.getAttribute("mandje");
+			if(mandje.containsKey(bierId)){
+				request.setAttribute("bierAlInMandje", "Bier is al in mandje. Nieuwe waarde overschrijft oude.");
+				request.setAttribute("oudAantal", mandje.get(bierId));
+			}
+			
+		}
+		
+		
+		request.setAttribute("bier", bierService.readBierSoortAndBrouwer(bierId));
+		}
+		catch(NumberFormatException ex){
+			request.setAttribute("fout", "BierNr mag niet leeg zijn. Mag enkel cijfers bevatten.");
+		}
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
@@ -57,5 +75,6 @@ public class BierServlet extends HttpServlet {
 			request.setAttribute("fout", "Getal mag niet leeg zijn");
 			this.doGet(request, response);
 		}
+		
 	}
 }

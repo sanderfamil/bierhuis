@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import be.vdab.services.BrouwerService;
 
@@ -21,7 +22,18 @@ public class BrouwerdetailsServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		request.setAttribute("brouwer", brouwerService.read(Long.parseLong(request.getParameter("brouwerId"))));
+		try{
+		HttpSession session = request.getSession(false);
+		if(session!=null){
+			request.setAttribute("mandje", session.getAttribute("mandje"));
+		}
+		request.setAttribute("brouwer", brouwerService.readBrouwerAndBier(Long.parseLong(request.getParameter("brouwerId"))));
+		
+		}
+		catch(NumberFormatException ex){
+			request.setAttribute("fout","BrouwerId mag niet leeg zijn. Mag enkel cijfers bevatten.");
+			
+		}
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 }

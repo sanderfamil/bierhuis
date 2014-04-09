@@ -12,5 +12,8 @@ public class BrouwerService {
 	public Iterable<Brouwer> findAll(){
 		return brouwerDAO.findAll();
 	}
+	public Brouwer readBrouwerAndBier(long id){
+		return brouwerDAO.readBrouwerAndBier(id);
+	}
 
 }

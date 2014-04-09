@@ -5,9 +5,11 @@
 <!doctype html>
 <html>
 <head>
-<v:head title="${bier.naam}"></v:head>
+<v:head title='${empty bier ? "Bier niet gevonden" : bier.naam}'/>
 </head>
 <body>
+<v:menu/>
+<c:if test="${not empty bier}">
 <h1>${bier.naam}</h1>
 <b>Alcohol</b><br>
 ${bier.alcohol} <c:out value="%"></c:out><br>
@@ -17,12 +19,23 @@ ${bier.alcohol} <c:out value="%"></c:out><br>
 ${bier.soort.naam}<br>
 <b>Brouwer</b><br>
 ${bier.brouwer.naam}<br>
-<form method="post">
-<label><b>Aantal</b><br>
+<form method="post" id="toevoegform">
+<label><b>Aantal</b><span class="fout"> ${fout}</span><br>
 <input type="hidden" name="bierNr" value="${bier.bierNr}">
-<input name="aantal" type="number" value="${param.aantal}" autofocus> </label>
-${fout}<br>
-<input type="submit" value="Toevoegen"> 
+<input name="aantal" type="number"  value="${oudAantal}" autofocus required min="1"> </label>
+<input type="submit" value="Toevoegen" id="toevoegknop"> 
 </form>
+${bierAlInMandje}
+	<script>
+		document.getElementById("toevoegform").onsubmit = function() {
+			document.getElementById("toevoegknop").disabled = true;
+
+		};
+	</script>
+</c:if>
+<c:if test="${empty bier}">
+<h1>Bier niet gevonden</h1>
+${fout}
+</c:if>
 </body>
 </html>

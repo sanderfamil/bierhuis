@@ -11,5 +11,8 @@ public class BierService {
 	public long countAll(){
 		return bierDAO.countAll();
 	}
+	public Bier readBierSoortAndBrouwer(long id){
+		return bierDAO.readBierSoortAndBrouwer(id);
+	}
 
 }

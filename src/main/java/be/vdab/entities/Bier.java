@@ -17,7 +17,7 @@ public class Bier implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@GeneratedValue
 	@Id
-	private long BierNr;
+	private long bierNr;
 	private String naam;
 	private BigDecimal alcohol;
 	private BigDecimal prijs;
@@ -32,8 +32,8 @@ public class Bier implements Serializable {
 		
 	}
 
-	public long getBierNr() {
-		return BierNr;
+	public long getbierNr() {
+		return bierNr;
 	}
 
 	public String getNaam() {
@@ -54,6 +54,31 @@ public class Bier implements Serializable {
 
 	public Brouwer getBrouwer() {
 		return brouwer;
+	}
+	
+	@Override
+	public boolean equals(Object object){
+		if(!(object instanceof Bier)){
+			return false;
+		}
+		else{
+			Bier anderBier = (Bier) object;
+			return(naam.equals(anderBier.getNaam()) && 
+					brouwer.getNaam().equals(anderBier.getBrouwer().getNaam()));
+		}
+	}
+	@Override
+	public int hashCode() {
+		String hashCode = naam+brouwer.getNaam();
+		return hashCode.hashCode();
+	}
+	@Override
+	public String toString(){
+		return "Naam:"+naam+
+				" Brouwer:"+brouwer.getNaam()+
+				" Soort:"+soort.getNaam()+
+				" Alcoholpercentage:"+alcohol+
+				" Prijs:"+prijs;
 	}
 
 

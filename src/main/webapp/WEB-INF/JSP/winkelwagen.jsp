@@ -9,8 +9,9 @@
 </head>
 <body>
 <v:menu/>
+<c:if test="${not empty mandje}">
 <h1>Winkelwagen</h1>
-<table>
+<table id="mandjetabel">
 <thead>
 <tr>
 <th>Bier</th>
@@ -20,7 +21,7 @@
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${bestelbon.bestelbonLijnen}" var="bestelbonLijn">
+<c:forEach items="${mandje.bestelbonLijnen}" var="bestelbonLijn">
 <tr>
 <td>${bestelbonLijn.bier.naam}</td>
 <td> <fmt:formatNumber value="${bestelbonLijn.bier.prijs}" minFractionDigits="2" maxFractionDigits="2"/> </td>
@@ -32,33 +33,44 @@
 <tfoot>
 <tr>
 <td colspan="3"/>
-<td>Totaal: <fmt:formatNumber value="${bestelbon.totaal}" minFractionDigits="2" maxFractionDigits="2"/></td>
+<td>Totaal: <fmt:formatNumber value="${mandje.totaal}" minFractionDigits="2" maxFractionDigits="2"/></td>
 </tr>
 </tfoot>
 </table>
 
-<form method="post">
+<form method="post" id="toevoegform">
 <label>
-<b>Naam</b><br>
-<input name="naam" autofocus><br>
+<b>Naam</b><span class="fout">${fouten.naam}</span><br>
+<input name="naam" autofocus required><br>
 </label>
 <label>
-<b>Straat</b><br>
-<input name="straat"><br>
+<b>Straat</b><span class="fout">${fouten.straat}</span><br>
+<input name="straat" required><br>
 </label>
 <label>
-<b>Huisnummer</b><br>
-<input name="huisNr"><br>
+<b>Huisnummer</b><span class="fout">${fouten.huisNr}</span><br>
+<input name="huisNr" required><br>
 </label>
 <label>
-<b>Postcode</b><br>
-<input name="postCode" type="number" min="1000" max="9999"><br>
+<b>Postcode</b><span class="fout">${fouten.postCode}</span><br>
+<input name="postCode" type="number" min="1000" max="9999" required>
+<br>
 </label>
 <label>
-<b>Gemeente</b><br>
-<input name="gemeente"><br>
+<b>Gemeente</b><span class="fout">${fouten.gemeente}</span><br>
+<input name="gemeente" required><br>
 </label>
-<input type="submit" value="Als bestelbon bevestigen">
+<input type="submit" value="Als bestelbon bevestigen" id="toevoegknop">
 </form>
+</c:if>
+	<script>
+		document.getElementById("toevoegform").onsubmit = function() {
+			document.getElementById("toevoegknop").disabled = true;
+
+		};
+	</script>
+<c:if test="${empty mandje}">
+<h1>Mandje niet gevonden.</h1>
+</c:if>
 </body>
 </html>

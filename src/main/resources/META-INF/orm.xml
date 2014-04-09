@@ -14,4 +14,18 @@ select br from Brouwer br
 order by naam
 </query>
 </named-query>
+<named-query name="Brouwer.readBrouwerAndBier">
+<query>
+select br from Brouwer br join fetch br.bieren
+where br.brouwerNr like :id
+</query>
+</named-query>
+<named-query name="Bier.readBierSoortAndBrouwer">
+<query>
+select b from Bier b 
+join fetch b.soort
+join fetch b.brouwer
+where b.bierNr like :id
+</query>
+</named-query>
 </entity-mappings>

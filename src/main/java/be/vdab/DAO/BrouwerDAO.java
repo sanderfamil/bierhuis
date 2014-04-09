@@ -13,4 +13,10 @@ public class BrouwerDAO extends AbstractDAO {
 				.getResultList();
 				
 	}
+	public Brouwer readBrouwerAndBier(long id){
+		return getEntityManager()
+				.createNamedQuery("Brouwer.readBrouwerAndBier", Brouwer.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
 }

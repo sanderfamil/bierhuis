@@ -5,9 +5,12 @@
 <!doctype html>
 <html>
 <head>
-<v:head title="${brouwer.naam}"></v:head>
+<v:head title='${empty brouwer ? "Brouwer niet gevonden" : brouwer.naam}'/>
 </head>
 <body>
+<v:menu/>
+<c:if test="${not empty brouwer}">
+<h1>${brouwer.naam}</h1>
 <ul>
 <c:forEach items="${brouwer.bieren}" var="bier">
 <li>
@@ -17,5 +20,10 @@
 </li>
 </c:forEach>
 </ul>
+</c:if>
+<c:if test="${empty brouwer}">	
+<h1>Brouwer niet gevonden</h1>
+${fout}
+</c:if>
 </body>
 </html>

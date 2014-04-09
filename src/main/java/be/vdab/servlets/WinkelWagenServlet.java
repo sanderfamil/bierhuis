@@ -1,6 +1,7 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -43,27 +44,57 @@ public class WinkelWagenServlet extends HttpServlet {
 					bestelbonLijnen.add(new BestelbonLijn(entry.getValue(),
 							bierService.read(entry.getKey())));
 				}
-				request.setAttribute("bestelbon",
+				request.setAttribute("mandje",
 						new Bestelbon(bestelbonLijnen));
+				
 			}
 		}
+		
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request,
+
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		// TODO controles
+
 		if (session != null) {
 			@SuppressWarnings("unchecked")
 			Map<Long, Integer> mandje = (Map<Long, Integer>) session
 					.getAttribute("mandje");
 			if (mandje != null) {
-				String naam = request.getParameter("naam");
-				String straat = request.getParameter("straat");
-				String huisNr = request.getParameter("huisNr");
-				int postCode = Integer.parseInt(request.getParameter("postCode"));//TODO numberformatexeption
-				String gemeente = request.getParameter("gemeente");
+				
+				Map<String, String> fouten = new HashMap<>();
+				String naam = validateString(request.getParameter("naam"));
+				if(naam.equals("Verplicht.")||naam.equals("Te lang.")){
+					fouten.put("naam", naam);
+					
+				}
+				String straat = validateString(request.getParameter("straat"));
+				if(straat.equals("Verplicht.")||straat.equals("Te lang.")){
+					fouten.put("straat", straat);
+				}
+								
+				
+				String huisNr = validateString(request.getParameter("huisNr"));
+				if(huisNr.equals("Verplicht.")||huisNr.equals("Te lang.")){
+					fouten.put("huisNr", huisNr);
+				}
+				
+				int postCode = 0;
+				if(request.getParameter("postCode")!=null){
+				try{
+					postCode = Integer.parseInt(request.getParameter("postCode"));
+				}catch(NumberFormatException ex){
+					fouten.put("postCode", "Tik een positief getal tussen 1000 en 9999");
+				}
+				}
+				
+				String gemeente = validateString(request.getParameter("gemeente"));
+				if(gemeente.equals("Verplicht.")||gemeente.equals("Te lang.")){
+					fouten.put("gemeente", gemeente);
+				}
+				if(fouten.isEmpty()){
 				Adres adres = new Adres(straat, huisNr, postCode, gemeente);
 				Set<BestelbonLijn> bestelbonLijnen = new HashSet<>();
 				for (Entry<Long, Integer> entry : mandje.entrySet()) {
@@ -75,9 +106,27 @@ public class WinkelWagenServlet extends HttpServlet {
 				session.invalidate();
 				
 				request.setAttribute("bestelbon", bestelbon.getBonNr());
-				request.getRequestDispatcher(REDIRECT_URL).forward(request, response);
+				request.getRequestDispatcher(REDIRECT_URL).forward(request, response);}
+				else{
+					request.setAttribute("fouten", fouten);
+					this.doGet(request, response);
+				}
+
 			}
 		}
 	}
 
+	public String validateString(String string){
+		if(string.isEmpty()){
+			return "Verplicht.";
+		}
+		else{
+			if(string.length()>50){
+				return "Te lang.";
+			}
+			else{
+				return string;
+			}
+		}
+	}
 }

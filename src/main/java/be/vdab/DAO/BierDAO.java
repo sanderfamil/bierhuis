@@ -13,5 +13,11 @@ public class BierDAO extends AbstractDAO {
 				.getSingleResult();
 				
 	}
+	public Bier readBierSoortAndBrouwer(long id){
+		return getEntityManager()
+				.createNamedQuery("Bier.readBierSoortAndBrouwer", Bier.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
 
 }

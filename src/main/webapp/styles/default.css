@@ -1,0 +1,38 @@
+body{
+	font-family: Verdana, sans-serif;
+	background-color: #FFCF92;
+	color: #4F4B45;
+}
+#menu{
+	a, a:visited, a:active{
+	color: #4F4B45;
+	text-decoration: none;
+	font-variant:small-caps;}
+	a:hover{
+	color: #4F4B45;
+	text-decoration: underline;
+	font-variant:small-caps;}
+}
+
+.fout{
+	color: #ff0000;
+	font-weight: bold;
+}
+a,a:visited,a:active {
+	color: #4F4B45;
+	text-decoration:none;
+}
+a:hover{
+		color: #4F4B45;
+	text-decoration:underline;
+}
+td:nth-child(n+1){
+	text-align: right;
+}
+#mandjetabel>tfoot{
+	text-align: right;
+}
+#mandjetabel>thead{
+	font-weight: bold;
+	text-align: center;
+}
