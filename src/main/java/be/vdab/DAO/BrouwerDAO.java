@@ -13,5 +13,4 @@ public class BrouwerDAO extends AbstractDAO {
 				.getResultList();
 				
 	}
-
 }

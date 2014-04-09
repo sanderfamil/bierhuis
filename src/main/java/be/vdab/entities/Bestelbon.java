@@ -1,6 +1,7 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -36,9 +37,24 @@ public class Bestelbon implements Serializable {
 		this.adres=adres;
 		this.bestelbonLijnen=bestelbonLijnen;
 	}
+	public Bestelbon(Set<BestelbonLijn> bestelbonLijnen){
+		this.bestelbonLijnen=bestelbonLijnen;
+	}
 	public long getBonNr() {
 		return bonNr;
 	}
 	
+	public Set<BestelbonLijn> getBestelbonLijnen() {
+		return bestelbonLijnen;
+	}
+	public BigDecimal getTotaal() {
+		BigDecimal totaal = BigDecimal.ZERO;
+		
+		for (BestelbonLijn bestelbonLijn : bestelbonLijnen) {
+			totaal= totaal.add(bestelbonLijn.getTotaal());
+		}
+		
+		return totaal;
+	}
 
 }

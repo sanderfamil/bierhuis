@@ -1,6 +1,7 @@
 package be.vdab.valueobjects;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
@@ -20,11 +21,22 @@ public class BestelbonLijn implements Serializable {
 	protected BestelbonLijn(){
 		
 	}
+	
+	public int getAantal() {
+		return aantal;
+	}
+
+	public Bier getBier() {
+		return bier;
+	}
+
 	public BestelbonLijn(int aantal, Bier bier){
 		this.aantal=aantal;
 		this.bier=bier;
 	}
 	
-	
+	public BigDecimal getTotaal() {
+		return bier.getPrijs().multiply(BigDecimal.valueOf(aantal));
+	}
 
 }
