@@ -45,7 +45,7 @@ public class WinkelWagenServlet extends HttpServlet {
 			if(mandje!=null){
 			List<Long> bierenIdLijst = new ArrayList<>();
 
-			for (Long bierId : mandje.keySet()) {
+			for (long bierId : mandje.keySet()) {
 				bierenIdLijst.add(bierId);
 
 			}

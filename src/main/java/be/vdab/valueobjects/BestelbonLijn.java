@@ -38,5 +38,21 @@ public class BestelbonLijn implements Serializable {
 	public BigDecimal getTotaal() {
 		return bier.getPrijs().multiply(BigDecimal.valueOf(aantal));
 	}
+	@Override
+	public boolean equals(Object object){
+		if(!(object instanceof BestelbonLijn)){
+			return false;
+		}
+		else{
+			BestelbonLijn andereBestelbonLijn = (BestelbonLijn) object;
+			return(bier.getNaam().equals(andereBestelbonLijn.getBier().getNaam()) && 
+					bier.getBrouwer().getNaam().equals(andereBestelbonLijn.getBier().getBrouwer().getNaam()));
+		}
+	}
+	@Override
+	public int hashCode() {
+		String hashCode = bier.getNaam()+bier.getBrouwer().getNaam();
+		return hashCode.hashCode();
+	}
 
 }

@@ -29,7 +29,7 @@ public class BrouwerdetailsServlet extends HttpServlet {
 		if(session!=null){
 			request.setAttribute("mandje", session.getAttribute("mandje"));
 		}
-		Long brouwerId = Long.parseLong(request.getParameter("brouwerId"));
+		long brouwerId = Long.parseLong(request.getParameter("brouwerId"));
 		
 		if (brouwerId < 0) {
 			request.setAttribute("fout", "BrouwerId moet een positief getal zijn.");

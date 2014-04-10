@@ -2,6 +2,7 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Set;
 
 import javax.persistence.Embedded;
@@ -41,6 +42,6 @@ public class Brouwer implements Serializable {
 		return adres;
 	}
 	public Set<Bier> getBieren() {
-		return bieren;
+		return Collections.unmodifiableSet(bieren);
 	}
 }

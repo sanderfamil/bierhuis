@@ -2,6 +2,7 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -45,7 +46,7 @@ public class Bestelbon implements Serializable {
 	}
 	
 	public Set<BestelbonLijn> getBestelbonLijnen() {
-		return bestelbonLijnen;
+		return Collections.unmodifiableSet(bestelbonLijnen);
 	}
 	public BigDecimal getTotaal() {
 		BigDecimal totaal = BigDecimal.ZERO;
