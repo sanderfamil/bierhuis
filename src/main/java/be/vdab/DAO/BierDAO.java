@@ -1,5 +1,7 @@
 package be.vdab.DAO;
 
+import java.util.List;
+
 import be.vdab.entities.Bier;
 
 public class BierDAO extends AbstractDAO {
@@ -18,6 +20,11 @@ public class BierDAO extends AbstractDAO {
 				.createNamedQuery("Bier.readBierSoortAndBrouwer", Bier.class)
 				.setParameter("id", id)
 				.getSingleResult();
+	}
+	public Iterable<Bier> findAllById(List<Long> id) {
+		return getEntityManager()
+				.createNamedQuery("Bier.findAllById", Bier.class)
+				.setParameter("id", id).getResultList();
 	}
 
 }

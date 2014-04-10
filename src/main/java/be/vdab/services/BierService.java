@@ -1,5 +1,7 @@
 package be.vdab.services;
 
+import java.util.List;
+
 import be.vdab.DAO.BierDAO;
 import be.vdab.entities.Bier;
 
@@ -13,6 +15,10 @@ public class BierService {
 	}
 	public Bier readBierSoortAndBrouwer(long id){
 		return bierDAO.readBierSoortAndBrouwer(id);
+	}
+
+	public Iterable<Bier> findAllById(List<Long> id) {
+		return bierDAO.findAllById(id);
 	}
 
 }

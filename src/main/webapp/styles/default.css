@@ -3,16 +3,7 @@ body{
 	background-color: #FFCF92;
 	color: #4F4B45;
 }
-#menu{
-	a, a:visited, a:active{
-	color: #4F4B45;
-	text-decoration: none;
-	font-variant:small-caps;}
-	a:hover{
-	color: #4F4B45;
-	text-decoration: underline;
-	font-variant:small-caps;}
-}
+
 
 .fout{
 	color: #ff0000;

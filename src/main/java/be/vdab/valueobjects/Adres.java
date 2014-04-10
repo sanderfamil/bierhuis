@@ -21,23 +21,8 @@ public class Adres implements Serializable  {
 		this.postCode=postCode;
 		this.gemeente=gemeente;
 	}
-
-	public String getStraat() {
-		return straat;
-	}
-
-	public String getHuisNr() {
-		return huisNr;
-	}
-
-	public int getPostCode() {
-		return postCode;
-	}
-
+	
 	public String getGemeente() {
 		return gemeente;
 	}
-	
-	
-
 }

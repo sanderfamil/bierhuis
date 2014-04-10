@@ -37,17 +37,10 @@ public class Brouwer implements Serializable {
 	public String getNaam() {
 		return naam;
 	}
-	public BigDecimal getOmzet() {
-		return omzet;
-	}
 	public Adres getAdres() {
 		return adres;
 	}
 	public Set<Bier> getBieren() {
 		return bieren;
 	}
-	
-	
-	
-
 }

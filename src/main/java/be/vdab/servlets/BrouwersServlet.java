@@ -20,7 +20,7 @@ public class BrouwersServlet extends HttpServlet {
 	private static final String VIEW = "/WEB-INF/JSP/brouwers.jsp";
 	private final transient BrouwerService brouwerService = new BrouwerService();
        
-
+        @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if(session!=null){
@@ -29,7 +29,4 @@ public class BrouwersServlet extends HttpServlet {
 		request.setAttribute("brouwers", brouwerService.findAll());
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
-
-
-
 }

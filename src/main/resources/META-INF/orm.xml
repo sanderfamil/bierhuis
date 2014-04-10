@@ -17,7 +17,7 @@ order by naam
 <named-query name="Brouwer.readBrouwerAndBier">
 <query>
 select br from Brouwer br join fetch br.bieren
-where br.brouwerNr like :id
+where br.brouwerNr = :id
 </query>
 </named-query>
 <named-query name="Bier.readBierSoortAndBrouwer">
@@ -25,7 +25,14 @@ where br.brouwerNr like :id
 select b from Bier b 
 join fetch b.soort
 join fetch b.brouwer
-where b.bierNr like :id
+where b.bierNr = :id
+</query>
+</named-query>
+<named-query name="Bier.findAllById">
+
+<query>
+select b from Bier b
+where b.id in (:id)
 </query>
 </named-query>
 </entity-mappings>

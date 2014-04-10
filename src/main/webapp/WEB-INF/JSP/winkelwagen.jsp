@@ -41,24 +41,24 @@
 <form method="post" id="toevoegform">
 <label>
 <b>Naam</b><span class="fout">${fouten.naam}</span><br>
-<input name="naam" autofocus required><br>
+<input name="naam" value="${param.naam}" autofocus required maxlength="50"><br>
 </label>
 <label>
 <b>Straat</b><span class="fout">${fouten.straat}</span><br>
-<input name="straat" required><br>
+<input name="straat" value="${param.straat}" required maxlength="50"><br>
 </label>
 <label>
 <b>Huisnummer</b><span class="fout">${fouten.huisNr}</span><br>
-<input name="huisNr" required><br>
+<input name="huisNr" value="${param.huisNr}" required maxlength="50"><br>
 </label>
 <label>
 <b>Postcode</b><span class="fout">${fouten.postCode}</span><br>
-<input name="postCode" type="number" min="1000" max="9999" required>
+<input name="postCode" value="${param.postCode}" type="number" min="1000" max="9999" required>
 <br>
 </label>
 <label>
 <b>Gemeente</b><span class="fout">${fouten.gemeente}</span><br>
-<input name="gemeente" required><br>
+<input name="gemeente" value="${param.gemeente}" required maxlength="50"><br>
 </label>
 <input type="submit" value="Als bestelbon bevestigen" id="toevoegknop">
 </form>

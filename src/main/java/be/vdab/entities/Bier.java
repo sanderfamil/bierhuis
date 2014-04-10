@@ -32,7 +32,7 @@ public class Bier implements Serializable {
 		
 	}
 
-	public long getbierNr() {
+	public long getBierNr() {
 		return bierNr;
 	}
 

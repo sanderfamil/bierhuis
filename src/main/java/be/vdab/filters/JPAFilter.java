@@ -18,7 +18,7 @@ import javax.servlet.annotation.WebFilter;
 public class JPAFilter implements Filter {
 	private static final EntityManagerFactory entityManagerFactory = Persistence
 			.createEntityManagerFactory("bierhuis");
-	private static final ThreadLocal<EntityManager> entityManagers = new ThreadLocal<EntityManager>();
+	private static final ThreadLocal<EntityManager> entityManagers = new ThreadLocal<>();
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
